@@ -3,6 +3,8 @@ package br.dev.fabricio.financeiro.responses;
 import br.dev.fabricio.financeiro.dtos.BancoDto;
 import br.dev.fabricio.financeiro.dtos.ContaDto;
 import br.dev.fabricio.financeiro.entities.LancamentoEntity;
+import br.dev.fabricio.financeiro.enums.EntradaSaidaSaldoEnum;
+import br.dev.fabricio.financeiro.enums.ReceitaDespesaEnum;
 
 import java.math.BigDecimal;
 
@@ -21,7 +23,7 @@ public class LancamentoResponse {
 
   public LancamentoResponse(LancamentoEntity lancamentoEntity) {
     this.id = lancamentoEntity.getId();
-    this.setConta(new ContaDto(lancamentoEntity.getConta().getId(), lancamentoEntity.getConta().getNome()));
+    this.setConta(new ContaDto(lancamentoEntity.getConta().getId(), lancamentoEntity.getConta().getNome(), EntradaSaidaSaldoEnum.valueOf(lancamentoEntity.getConta().getEntradaSaidaSaldo()), ReceitaDespesaEnum.valueOf( lancamentoEntity.getConta().getReceitaDespesa())));
     this.setBanco(new BancoDto(lancamentoEntity.getBanco().getId(), lancamentoEntity.getBanco().getNome()));
     this.ano = lancamentoEntity.getAno();
     this.mes = lancamentoEntity.getMes();

@@ -2,6 +2,7 @@ package br.dev.fabricio.financeiro.controllers;
 
 import br.dev.fabricio.financeiro.requests.BancoRequest;
 import br.dev.fabricio.financeiro.responses.BancoResponse;
+import br.dev.fabricio.financeiro.responses.HealthResponse;
 import br.dev.fabricio.financeiro.services.BancoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/bancos")
+@RequestMapping("${api.financeiro}"+"/bancos")
 public class BancoController {
 
   @Autowired
@@ -53,6 +54,17 @@ public class BancoController {
     } catch (RuntimeException e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
+  }
+
+  @GetMapping("/health")
+  public ResponseEntity<HealthResponse> health(){
+    return ResponseEntity.ok(new HealthResponse("200", "Endpoint /bancos está no ar"));
+  }
+
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void delete(@PathVariable Long id){
+    bancoService.delete(id);
   }
 
 }

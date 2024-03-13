@@ -4,7 +4,6 @@ import br.dev.fabricio.financeiro.entities.BancoEntity;
 import br.dev.fabricio.financeiro.repositories.BancoRepository;
 import br.dev.fabricio.financeiro.requests.BancoRequest;
 import br.dev.fabricio.financeiro.responses.BancoResponse;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,10 +36,9 @@ public class BancoService {
 
     BancoEntity bancoEntityAtual = optional.get();
     BancoEntity bancoEntity = new BancoEntity(bancoRequest);
+    bancoEntity.setId(bancoEntityAtual.getId());
 
-    BeanUtils.copyProperties(bancoEntity, bancoEntityAtual, "id");
-
-    bancoEntity = bancoRepository.save(bancoEntityAtual);
+    bancoEntity = bancoRepository.save(bancoEntity);
     return new BancoResponse(bancoEntity);
   }
 
@@ -54,7 +52,7 @@ public class BancoService {
 
   public BancoResponse findById(Long id) {
     Optional<BancoEntity> optional = bancoRepository.findById(id);
-    if(optional.isEmpty()){
+    if (optional.isEmpty()) {
       throw new RuntimeException(String.format("Banco de código %d não encontrado", id));
     }
     BancoEntity bancoEntity = optional.get();
@@ -63,4 +61,7 @@ public class BancoService {
   }
 
 
+  public void delete(Long id) {
+    bancoRepository.deleteById(id);
+  }
 }

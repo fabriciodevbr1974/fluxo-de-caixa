@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Cadastro de Bancos</title>
+
+    <script>
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+             vars[key] = value;
+            });
+            return vars;
+        }
+    </script>
+
+    <script>
+        var id = getUrlVars()["id"];
+    </script>
+
+</head>
+<body onload="carregarCamposParaEdicao(id)">
+
+<h1>Cadastro de Bancos</h1>
+
+<form>
+    <div class="mb-3">
+        <label for="bancoId" class="form-label">Id</label>
+        <input type="text" class="form-control" id="bancoId" aria-describedby="bancoIdHelp" readonly>
+        <div id="bancoIdHelp" class="form-text">Digite o id do banco.</div>
+    </div>
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" aria-describedby="nomeHelp">
+        <div id="nomeHelp" class="form-text">Digite o nome do banco.</div>
+    </div>
+    <div class="mb-3">
+        <label for="agencia" class="form-label">Agência</label>
+        <input type="text" class="form-control" id="agencia" aria-describedby="agenciaHelp">
+        <div id="agenciaHelp" class="form-text">Digite a agência do banco.</div>
+    </div>
+    <div class="mb-3">
+        <label for="numeroConta" class="form-label">Número da Conta</label>
+        <input type="text" class="form-control" id="numeroConta" aria-describedby="numeroContaHelp">
+        <div id="numeroContaHelp" class="form-text">Digite o número da conta do banco.</div>
+    </div>
+    <div class="mb-3">
+        <label for="chavePix" class="form-label">Chave PIX</label>
+        <input type="text" class="form-control" id="chavePix" aria-describedby="chavePixHelp">
+        <div id="chavePixHelp" class="form-text">Digite a chave pix do banco.</div>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="update()">Gravar</button>
+</form>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<script src="./js/banco.js">
+
+</script>
+
+</html>
